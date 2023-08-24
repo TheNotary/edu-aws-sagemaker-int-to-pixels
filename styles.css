@@ -1,0 +1,24 @@
+#grid {
+    display: flex;
+    flex-direction: column;
+    width: 90px;
+    margin-top: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cell {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 5px;
+    background-color: white; /* Default background */
+}
+
+.active {
+    background-color: black;
+}
+
