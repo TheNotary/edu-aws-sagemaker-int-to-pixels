@@ -9,34 +9,72 @@
 </head>
 
 <body>
-    <input type="number" id="numberInput" min="0" max="9" onchange="drawNumber()">
-    <button onclick="drawNumber()">Draw</button>
+    <div class="experiment-well">
+        <h1>Straight Lookup</h1>
+        <input onchange="drawNumberViaLookup('1')" type="number" id="numberInput1" min="0" max="9" maxlength="1" value="0">
+        <button onclick="drawNumberViaLookup('1')">Draw</button>
 
-    <div id="grid">
-        <div class="row">
-            <div class="cell" id="cell00"></div>
-            <div class="cell" id="cell01"></div>
-            <div class="cell" id="cell02"></div>
+        <div id="grid1">
+            <div class="row">
+                <div class="cell00"></div>
+                <div class="cell01"></div>
+                <div class="cell02"></div>
+            </div>
+            <div class="row">
+                <div class="cell10"></div>
+                <div class="cell11"></div>
+                <div class="cell12"></div>
+            </div>
+            <div class="row">
+                <div class="cell20"></div>
+                <div class="cell21"></div>
+                <div class="cell22"></div>
+            </div>
+            <div class="row">
+                <div class="cell30"></div>
+                <div class="cell31"></div>
+                <div class="cell32"></div>
+            </div>
+            <div class="row">
+                <div class="cell40"></div>
+                <div class="cell41"></div>
+                <div class="cell42"></div>
+            </div>
         </div>
-        <div class="row">
-            <div class="cell" id="cell10"></div>
-            <div class="cell" id="cell11"></div>
-            <div class="cell" id="cell12"></div>
-        </div>
-        <div class="row">
-            <div class="cell" id="cell20"></div>
-            <div class="cell" id="cell21"></div>
-            <div class="cell" id="cell22"></div>
-        </div>
-        <div class="row">
-            <div class="cell" id="cell30"></div>
-            <div class="cell" id="cell31"></div>
-            <div class="cell" id="cell32"></div>
-        </div>
-        <div class="row">
-            <div class="cell" id="cell40"></div>
-            <div class="cell" id="cell41"></div>
-            <div class="cell" id="cell42"></div>
+    </div>
+    
+    
+    <div class="experiment-well">
+        <h1>Neural Network Lookup</h1>
+        <input onchange="drawNumberViaNN(2)" type="number" id="numberInput2" min="0" max="9" maxlength="1" value="0">
+        <button onclick="drawNumberViaNN(2)">Draw</button>
+
+        <div id="grid2">
+            <div class="row">
+                <div class="cell00"></div>
+                <div class="cell01"></div>
+                <div class="cell02"></div>
+            </div>
+            <div class="row">
+                <div class="cell10"></div>
+                <div class="cell11"></div>
+                <div class="cell12"></div>
+            </div>
+            <div class="row">
+                <div class="cell20"></div>
+                <div class="cell21"></div>
+                <div class="cell22"></div>
+            </div>
+            <div class="row">
+                <div class="cell30"></div>
+                <div class="cell31"></div>
+                <div class="cell32"></div>
+            </div>
+            <div class="row">
+                <div class="cell40"></div>
+                <div class="cell41"></div>
+                <div class="cell42"></div>
+            </div>
         </div>
     </div>
 

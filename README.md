@@ -19,7 +19,21 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
+## Train the Model
 
+```
+python int_to_pixels/int_to_pixels.py
+```
+
+Follow the prompt to train the model or enter a repl.  
+
+## Run Server
+
+```
+.venv/bin/uvicorn app:app --reload --host localhost --port 8000
+```
+
+From there, navigate to http://localhost:8000 to play around with the demo.  
 
 ## Refs
 

@@ -1,7 +1,8 @@
 import tensorflow as tf
+from keras.models import Sequential, load_model
+from keras.layers import Dense, Embedding, Flatten
 import numpy as np
 print("TensorFlow version:", tf.__version__)
-
 
 def train_model():
     data = {
@@ -20,10 +21,6 @@ def train_model():
     X = np.array(list(data.keys()))
     Y = np.array([np.array(data[key]).flatten() for key in data.keys()])
 
-
-    from keras.models import Sequential
-    from keras.layers import Dense, Embedding, Flatten
-
     model = Sequential([
         Embedding(10, 64, input_length=1), # Embed the integers to a higher-dimensional space
         Flatten(), # Flatten the embedding
@@ -37,20 +34,23 @@ def train_model():
     print("Training done, now loading and using the model")
 
 
-def load_and_use_model():
-    # now we load the model and use it
-    from keras.models import load_model
-    model = load_model('model.keras')
-
+def repl_with_model():
     while True:
         print("Enter a number between 0 and 9 (q to quit):)")
         response = input()
         if response == 'q':
             break
         number = int(response)
-        prediction = model.predict(np.array([number]))
-        grid_prediction = (prediction > 0.5).astype(int).reshape(5, 3)
+        grid_prediction = predict_pixels(number)
         print(grid_prediction)
+
+
+def predict_pixels(number):
+    model = load_model('model.keras')
+    prediction = model.predict(np.array([number]))
+    grid_prediction = (prediction > 0.5).astype(int).reshape(5, 3)
+    return grid_prediction.tolist()
+
 
 if __name__ == '__main__':
     print("Choose mode: 1 for training, 2 for loading and using the model")
@@ -58,6 +58,6 @@ if __name__ == '__main__':
     if mode == 1:
         train_model()
     elif mode == 2:
-        load_and_use_model()
+        repl_with_model()
     else:
         print("Invalid mode, exiting")
