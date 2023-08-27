@@ -27,9 +27,9 @@ def train_model():
     # 2. Normalize the byte to [0, 1]
     normalized_input = tf.keras.layers.Lambda(lambda x: tf.cast(x, tf.float32) / 255.0)(input_layer)
     # 3. Hidden layer (let's say with 32 units and ReLU activation)
-    hidden_layer = tf.keras.layers.Dense(32, activation='relu')(normalized_input)
+    hidden_layer = tf.keras.layers.Dense(15, activation='relu')(normalized_input)
     hidden_layer = tf.keras.layers.Dense(32, activation='relu')(hidden_layer)
-    hidden_layer = tf.keras.layers.Dense(32, activation='relu')(hidden_layer)
+    hidden_layer = tf.keras.layers.Dense(15, activation='relu')(hidden_layer)
     # 4. Output layer with 15 parameters (let's assume a linear activation for simplicity)
     output_layer = tf.keras.layers.Dense(15, activation='sigmoid')(hidden_layer)
     # Construct the model
@@ -52,9 +52,18 @@ def train_model():
     # model.add(tf.keras.layers.Dense(8, input_shape=(16,)))
 
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-    model.fit(X, Y, epochs=20000)
+    
+    # while True:
+    #     print("Enter for train, s for stop")
+    #     if input() == "s":
+    #         break
+    #     model.fit(X, Y, epochs=1000)
+        
+    model.fit(X, Y, epochs=15000)
+        
     model.save('model.keras')
     print("Training done, now loading and using the model")
+    model.summary()
 
 
 def repl_with_model():
@@ -99,6 +108,21 @@ def run_tests():
     print("All tests passed!")
     sys.exit(0)
 
+def summary():
+    model = load_model('model.keras', safe_mode=False)
+    model.summary()
+
+def training_charge():
+    model = load_model('model.keras', safe_mode=False)
+    # X = np.array(list(data.keys()))
+    # Y = np.array([np.array(data[key]).flatten() for key in data.keys()])
+
+    X = np.array([8])
+    Y = np.array([np.array(data[8]).flatten()])
+    model.fit(X, Y, epochs=1000)
+    model.save('model.keras')
+
+
 if __name__ == '__main__':
     # check the cmd line args to see if they want to just train the model non-interactively
     if len(sys.argv) > 1:
@@ -112,6 +136,8 @@ if __name__ == '__main__':
     print("1 for training the model")
     print("2 REPLing with the model")
     print("3 for testing the model")
+    print("4 for model summary")
+    print("5 for training_charge")
     mode = int(input())
     if mode == 1:
         train_model()
@@ -119,5 +145,9 @@ if __name__ == '__main__':
         repl_with_model()
     elif mode == 3:
         run_tests()
+    elif mode == 4:
+        summary()
+    elif mode == 5:
+        training_charge()
     else:
         print("Invalid mode, exiting")
